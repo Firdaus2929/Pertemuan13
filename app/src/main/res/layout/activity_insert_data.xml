@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/header"
-        app:layout_constrainBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
     
@@ -33,7 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/costum_input"
                 android:hint="Enter Nama Barang"
                 android:padding="20dp" />
             <EditText
@@ -41,7 +39,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/costum_input"
                 android:hint="Enter Jumlah Barang"
                 android:inputType="number"
                 android:padding="20dp" />

@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/bgel"
-        app:layout_constrainBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
     <LinearLayout

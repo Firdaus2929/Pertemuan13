@@ -1,11 +1,22 @@
 package com.informatika19100018.databarang
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.informatika19100018.databarang.adapter.ListContent
+import com.informatika19100018.databarang.model.ResponseBarang
+import com.informatika19100018.databarang.model.ResponseUsersItem
+import com.informatika19100018.databarang.network.koneksi
+import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,26 +25,43 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 //        setSupportActionBar(findViewById(R.id.toolbar))
 
-//        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                    .setAction("Action", null).show()
-//        }
-        koneksi.service.getUser().enqueue(object : Callback<List<ResponseUsersItem?>>){
-            override fun onFailure(call: Call<List<ResponseUserItem?>>, t: Throwable) {
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
+            val i = Intent(this, InsertDataActivity::class.java)
+            startActivity(i)
+        }
+        getData()
+
+    }
+    public fun getData() {
+        koneksi.service.getBarang().enqueue(object : Callback<ResponseBarang> {
+            override fun onFailure(call: Call<ResponseBarang>, t: Throwable) {
                 Log.d("pesan1", t.localizedMessage)
             }
 
             override fun onResponse(
-                call: Call<List<ResponseUserItem?>>,
-                response: Response<List<ResponseUsersItem?>>
+                call: Call<ResponseBarang>,
+                response: Response<ResponseBarang>
             ) {
-                if(response.isSuccessful){
-                    Log.d("pesan", response.body().toString());
+                if (response.isSuccessful) {
+                    val dataBody = response.body()
+                    val datacontent = dataBody!!.data
+
+                    val rvAdapter = ListContent(datacontent, this@MainActivity)
+                    rvAdapter.notifyDataSetChanged()
+
+                    rv_data_barang.apply {
+                        adapter = rvAdapter
+                        layoutManager = LinearLayoutManager(this@MainActivity)
+                    }
                 }
             }
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        getData()
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)

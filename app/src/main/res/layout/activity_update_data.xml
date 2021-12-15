@@ -9,7 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/header"
-        app:layout_constrainBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
     <LinearLayout
@@ -29,14 +28,12 @@
         <EditText
             android:id="@+id/et_nama_barang"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_nama_barang" />
+            android:layout_height="wrap_content" />
         <EditText
             android:inputType="number"
             android:id="@+id/et_jumlah_barang"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/enter_jumlah_barang" />
+            android:layout_height="wrap_content" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +46,6 @@
                 android:id="@+id/btn_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/update"
                 android:textAllCaps="false" />
             <Button
                 android:textColor="#FFF"
